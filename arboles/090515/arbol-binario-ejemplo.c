@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* Arbol binario 
+/*
+  Ejercicio hecho en clase.
+  Arbol binario 
    9/Enero/2015
    Gabriel Acosta
    Estructura de Datos
