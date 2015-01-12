@@ -25,6 +25,7 @@ ArbolBinario *crear(ArbolBinario *, int); 		/* Inicializa el arbol */
 NodoBinario *insertar_izq(NodoBinario *, int);
 NodoBinario *insertar_der(NodoBinario *, int);
 void imprimir(NodoBinario *);
+void postorden(NodoBinario *);
 void preorden(NodoBinario *);
 void inorden(NodoBinario *);
 int main()
@@ -47,9 +48,12 @@ int main()
   nodo_actual = bt->raiz->izq;
   nodo_actual = insertar_der(nodo_actual, 2020);
 
+  printf("preorden: \n");
   preorden(bt->raiz);
-  printf("\n");
+  printf("\ninorden: \n");
   inorden(bt->raiz);
+  printf("\npostorden: \n");
+  postorden(bt->raiz);
   printf("\n");
   return 0;
 }
@@ -69,6 +73,15 @@ void preorden(NodoBinario *raiz)
     imprimir(raiz);
     preorden(raiz->izq);
     preorden(raiz->der);
+  }
+}
+
+void postorden(NodoBinario *raiz)
+{
+  if(raiz != NULL) {
+    postorden(raiz->izq);
+    postorden(raiz->der);
+    imprimir(raiz);
   }
 }
 
