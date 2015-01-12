@@ -26,7 +26,7 @@ NodoBinario *insertar_izq(NodoBinario *, int);
 NodoBinario *insertar_der(NodoBinario *, int);
 void imprimir(NodoBinario *);
 void preorden(NodoBinario *);
-
+void inorden(NodoBinario *);
 int main()
 {
   ArbolBinario *bt = crear(bt, 304);
@@ -49,7 +49,18 @@ int main()
 
   preorden(bt->raiz);
   printf("\n");
+  inorden(bt->raiz);
+  printf("\n");
   return 0;
+}
+
+void inorden(NodoBinario *raiz)
+{
+  if(raiz != NULL) {
+    inorden(raiz->izq);
+    imprimir(raiz);
+    inorden(raiz->der);
+  }
 }
 
 void preorden(NodoBinario *raiz)
