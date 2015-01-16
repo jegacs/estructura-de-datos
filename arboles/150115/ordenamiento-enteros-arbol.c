@@ -51,7 +51,7 @@ int main()
 
 void insertar_ordenados(NodoBinario *raiz, int num)
 {
-  if(raiz != NULL)
+  if(raiz != NULL) {
     if(raiz->dato >= num) {
       if(raiz->izq != NULL)
 	insertar_ordenados(raiz->izq, num);
@@ -60,10 +60,14 @@ void insertar_ordenados(NodoBinario *raiz, int num)
     } else {
       if(raiz->der != NULL)
 	insertar_ordenados(raiz->der, num);
-    else
-      insertar_der(raiz, num);
+      else
+	insertar_der(raiz, num);
     }
-  error("Objeto no inicializado");
+  }
+  else {
+    printf("\nObjeto no inicializado\n");
+    exit(1);
+  }
 }
 
 void inorden(NodoBinario *raiz)
