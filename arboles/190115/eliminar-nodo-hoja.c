@@ -45,7 +45,11 @@ int main(int argc, char **argv)
   /* Se elimina el hijo izquierdo del nodo */
   printf("\n");
   inorden(bt->raiz);
-  
+  printf("\n");
+
+  /* Eliminando el nodo 52, entonces, sube a sustituirlo el 45 */
+  /* buscar_nodo... */
+  /* eliminar_nodo_hoja... */
   return 0;
 }
 
