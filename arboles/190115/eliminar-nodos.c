@@ -33,6 +33,8 @@ void insertar_ordenados(NodoBinario *, int num);
 void eliminar_nodo(NodoBinario *, NodoBinario *); /* Devuelve 1 si existe, 0 si no */
 NodoBinario *buscar_nodo(NodoBinario *, int);
 NodoBinario *padre(NodoBinario *, NodoBinario *);
+
+
 #define MAX 8 - 1
 
 int main(int argc, char **argv)
@@ -77,7 +79,7 @@ int main(int argc, char **argv)
 void eliminar_nodo(NodoBinario *raiz, NodoBinario *nodo) {
   
   if(nodo->izq == NULL && nodo->der == NULL) { /* Nodo hoja */
-    NodoBinario *p = padre(raiz , nodo);
+    NodoBinario *p = padre(raiz , nodo);  
     printf("\nNodo hoja\n");
     if(p->izq == nodo) {
       p->izq = NULL;
@@ -86,20 +88,58 @@ void eliminar_nodo(NodoBinario *raiz, NodoBinario *nodo) {
       if(p->der == nodo)
     	p->der = NULL;
     }
+    free(nodo);
   }
   else {
     if(nodo->izq != NULL && nodo->der != NULL) {
       /* Nodo con dos subarboles */
       printf("\nNodo con dos subarboles\n");
+      NodoBinario *aux_1 = nodo->der;
+      NodoBinario *it = nodo->der;
+      
+      while(it->izq != NULL) {
+	it = it->izq;
+      }
+      int d = it->dato;
+      eliminar_nodo(nodo, it);
+      nodo->dato = d;
+      //      printf("%i\n", it);
     }
     else {
-      if((nodo->izq != NULL && nodo->der == NULL) || (nodo->izq == NULL && nodo->der != NULL)) {
+      if((nodo->izq != NULL && nodo->der == NULL) || \
+	 (nodo->izq == NULL && nodo->der != NULL)) {
 	printf("\nNodo con un solo subarbol\n");
+	NodoBinario *p = padre(raiz , nodo);
+	if(p->izq == nodo) {
+	  if(nodo->izq != NULL) {
+	    p->izq = nodo->izq;
+	  }
+	  else  {
+	    if(nodo->der != NULL) {
+	      p->izq = nodo->der;
+	    }
+	  }
+	}
+	else {
+	  if(p->der == nodo) {
+	    if(nodo->izq != NULL) {
+	      p->der = nodo->izq;
+	    }
+	    else  {
+	      if(nodo->der != NULL) {
+		p->der = nodo->der;
+	      }
+	    }
+	    
+	  }
+	} 
+	free(nodo);
+	
       }
     }
   }
     
-    free(nodo);
+    
 }
 
 
