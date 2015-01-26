@@ -37,7 +37,7 @@ int main()
   int i = MAX;
   while(--i) {
     insertar_ordenados(bt->raiz, num[i]);
-    printf("%i", i);
+    /* printf("%i", i); */
   }
   printf("\npreorden: \n");
   preorden(bt->raiz);
