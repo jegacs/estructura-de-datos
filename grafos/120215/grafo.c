@@ -8,13 +8,15 @@ Grafo *inic_grafo()
 }
 
 void agregar_vertice(Grafo *g, int info)
-/* Necesita ser enviado un apuntador a apuntador, declarando
-   solamente un apuntador a grafo, la informacion del puntero
-   es perdida al regresar de la funcion. Debido a que si se quiere
-   cambiar el apuntador, el apuntador sera destruido al finalizar
-   la llamada a la funcion, debido a que el apuntador realmente 
-   se pasa por valor.*/
 {
+  /* Se usa un apuntador a apuntador para 
+     poder modificar la variable original,
+     si no se usara de esta manera, no 
+     haría efecto en la variable original, 
+     esto debido a que el apuntador simple 
+     es pasado por valor, y es destruido 
+     cuando sale del scope/ambito*/
+
   Vertice **it = &(g->inicio); /* Referencia del nodo */
   if((*it) == NULL) {
     *it = (Vertice *)malloc(sizeof(Vertice));
@@ -31,3 +33,4 @@ void agregar_vertice(Grafo *g, int info)
   
   g->vertices++;
 }
+
