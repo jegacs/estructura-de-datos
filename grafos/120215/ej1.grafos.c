@@ -22,6 +22,10 @@ int main()
   Vertice *v2 = buscar_vertice(g, 12);
 
   agregar_arco(v1, v2);
+  agregar_arco(v1, v1);
+  
+  v1 = buscar_vertice(g, 115);
+  agregar_arco(v2, v1);
   
   imprimir(g);
 
