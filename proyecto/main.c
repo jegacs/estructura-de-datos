@@ -9,23 +9,26 @@
 struct Vertice {
   char n;
 };
-
+/* Encuentra el peso minimo para llegar de un nodo a otro. */
 void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
 		  int, int,
 		  int *, int []);
+void recuperacamino(int, int, int []);
 int main()
 {
   int anteriores[MAXNODOS];
-  int i, *pd = 0;
+  int i, pd;
   /* Etiquetas de los nodos (para identificarlos) */
-  struct Vertice nodos[MAXNODOS] = {
+  
+  /*struct Vertice nodos[MAXNODOS] = {
     { .n = 'A'},
     { .n = 'B'},
     { .n = 'C'},
     { .n = 'D'},
     { .n = 'E'}
   };
-
+  */
+  
   unsigned int MatrizAdy[MAXNODOS][MAXNODOS] = {
     { INF, 10, 5, 1, INF},
     { INF, INF, INF, INF, 15},
@@ -34,13 +37,24 @@ int main()
     { INF, INF, INF, INF, INF}    
   };
 
-  caminominimo(MatrizAdy, 0, 4, pd, anteriores);
-  printf("%d", *pd);
+  caminominimo(MatrizAdy, 0, 4, &pd, anteriores);
+  printf("La distancia mas corta es %d\n", pd);
+  printf("Los caminos son ");
+  recuperacamino(4, 0, anteriores);
   printf("\n");
-  
   return 0;
 }
-
+void recuperacamino(int v, int s, int anteriores[])
+{
+  int anterior = anteriores[v];
+  if(v != s) {
+    recuperacamino(anterior, s, anteriores);
+    printf(" -> V%d", v);
+  } else {
+    printf("V%d", s);
+  }
+  
+}
 void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
 		  int s, int t,
 		  int *pd, int precede[])
@@ -50,7 +64,7 @@ void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
   int smalldist, newdist;
 
   for(i = 0; i < MAXNODOS; i++) {
-    perm[i] = INF;
+    perm[i] = NOMIEMBRO;
     distance[i] = INF;
   }
   perm[s] = MIEMBRO;
@@ -59,7 +73,7 @@ void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
   while(current != t) {
     smalldist = INF;
     dc = distance[current];
-    for(i = 0; i < MAXNODOS; i++) 
+    for(i = 0; i < MAXNODOS; i++) { 
       if(perm[i] == NOMIEMBRO) {
 	newdist = dc + matrix[current][i];
 	if(newdist < distance[i]) {
@@ -74,7 +88,9 @@ void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
 	  k = i;
 	}
       }
-      current = k;
-      perm[current] = MIEMBRO;
+    }
+    current = k;
+    perm[current] = MIEMBRO;
   }
+  *pd = distance[t];
 }
