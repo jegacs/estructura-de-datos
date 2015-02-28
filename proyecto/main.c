@@ -16,19 +16,9 @@ void caminominimo(unsigned int matrix[MAXNODOS][MAXNODOS],
 void recuperacamino(int, int, int []);
 int main()
 {
-  int anteriores[MAXNODOS];
+  int anteriores[MAXNODOS];	/* Se guardan los nodos que ya han sido procesados*/
   int i, pd;
-  /* Etiquetas de los nodos (para identificarlos) */
-  
-  /*struct Vertice nodos[MAXNODOS] = {
-    { .n = 'A'},
-    { .n = 'B'},
-    { .n = 'C'},
-    { .n = 'D'},
-    { .n = 'E'}
-  };
-  */
-  
+      
   unsigned int MatrizAdy[MAXNODOS][MAXNODOS] = {
     { INF, 10, 5, 1, INF},
     { INF, INF, INF, INF, 15},
